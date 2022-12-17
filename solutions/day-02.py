@@ -1,11 +1,10 @@
 def shape(round):
-    if round[1] == "X": return 1
-    if round[1] == "Y": return 2
-    return 3
+    return ord(round[1]) - 87
 
 def outcome(round):
-    if round in [["A", "X"], ["B", "Y"], ["C", "Z"]]: return 3;
-    if round in [["A", "Y"], ["B", "Z"], ["C", "X"]]: return 6
+    diff = ord(round[1]) - ord(round[0])
+    if diff == 23: return 3;
+    if not diff % 3: return 6
     return 0
 
 def score(round):
@@ -17,4 +16,5 @@ input = f.read()
 
 instructions = [instruction.split(" ") for instruction in input.split("\n")]
 total = sum([score(instruction) for instruction in instructions])
-print(total)
+
+print("Part 1: %s" % total)
